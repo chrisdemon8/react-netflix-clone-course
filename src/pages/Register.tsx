@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { DragDropContext, Droppable, Draggable, DropResult } from "react-beautiful-dnd";
-import { Box, Button, FormControl, FormHelperText, Input, InputLabel, MenuItem, Modal, Select, TextField, Typography } from '@mui/material';
+import { Button, FormControl, FormHelperText, TextField } from '@mui/material';
 import '../style/login.css';
 import { Link } from 'react-router-dom';
+import HeaderComponent from '../components/Header/HeaderComponent';
 
 
 export interface UserInterface {
@@ -11,10 +11,8 @@ export interface UserInterface {
     username: string;
     password: string;
 }
-
-
-
-export default function Login() {
+ 
+export default function Register() {
 
     const [user, setUser] = useState<UserInterface>({ key: "feg", username: "test", password: "ee" });
 
@@ -36,6 +34,7 @@ export default function Login() {
 
     return (
         <div className="login">
+            <HeaderComponent></HeaderComponent>
             <img src="/img/netflix.svg" alt="netflix" />
             <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
 
