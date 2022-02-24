@@ -7,9 +7,8 @@ import {
     Routes,
     Link
 } from "react-router-dom";
-import { increment} from './app/reducer'; 
-import { useAppSelector, useAppDispatch } from './app/hooks'; 
-import Profil from './components/ProfilSelection'; 
+import { increment} from './redux/reducer'; 
+import { useAppSelector, useAppDispatch } from './redux/hooks';   
 import { useSelector } from 'react-redux';
 import { Button } from '@mui/material';
 import NotFoundPage from './pages/NotFoundPage';
@@ -41,7 +40,7 @@ export default () => {
                     <Route path='/login' element={<Login />} />
                     <Route path='/browse' element={<BrowsePage />} />
                     <Route path='/register' element={<Register />} />
-                    <Route path='/profil' element={<Profil />} />
+                    <Route path='/profil' element={<Register /> } />
                     <Route path='*' element={<NotFoundPage />} />
                 </Routes >
             </div>

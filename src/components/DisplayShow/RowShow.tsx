@@ -1,10 +1,16 @@
 import React, { useEffect, useState } from "react";
+import styled from "styled-components";
 import axios from "../Requests/Axios";
+import { useDispatch } from "react-redux"; 
+import SliderItem from "./SliderItem";
+
+import { v4 as uuidv4 } from 'uuid';
 
 interface RowProps {
     title: string;
     fetchUrl: string;
 }
+
 
 function RowShow({ title, fetchUrl }: RowProps) {
     const [movies, setMovies] = useState([]);
@@ -13,7 +19,7 @@ function RowShow({ title, fetchUrl }: RowProps) {
 
         async function fetchData() {
             const request = await axios.get(fetchUrl);
-            setMovies(request.data.results);
+            setMovies(request.data.results); 
             return request;
         }
 
@@ -21,21 +27,40 @@ function RowShow({ title, fetchUrl }: RowProps) {
 
     }, [fetchUrl]);
 
+   
+
     return (
         <div>
             <h2>{title}</h2>
 
-            <div>
+            <Slider>
                 {movies.map((movie: any) => (
-                    <img
-                        key={movie.id}
-                        src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                        alt={movie?.title || movie?.original_title || movie?.name || movie?.original_name}
-                    />
+                    <SliderItem key={uuidv4()} id={movie.id} mediaType={movie.media_type} src={movie.poster_path} title={movie?.title || movie?.original_title || movie?.name || movie?.original_name || ""}/>
+                         
                 ))}
-            </div>
+            </Slider>
         </div>
     );
 }
+
+export const Image = styled.img`
+max-height: 250px;
+
+&:hover {
+    transform: scale(1.09);
+  } 
+`
+ 
+
+export const Slider = styled.div`
+display: flex;
+overflow-y: hidden;
+overflow-x: scroll;
+padding: 20px;
+&::-webkit-scrollbar {
+    display: none;
+  }
+`
+ 
 
 export default RowShow;

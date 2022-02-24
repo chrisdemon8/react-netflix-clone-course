@@ -1,37 +1,65 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import FooterComponent from '../components/Footer/FooterComponent';
 import Logo from '../components/Header/Logo';
 import styled from 'styled-components';
+import axios from "../components/Requests/Axios";
 import Requests from '../components/Requests/Requests';
 import RowShow from '../components/DisplayShow/RowShow';
 
 const BrowsePage = () => {
 
-    return (
-        <>
-            <BrowserHeader>
-                <BrowseNavbar>
-                    <Logo />
-                    <HeaderLink  >Films</HeaderLink>
-                    <HeaderLink  >Series</HeaderLink>
-                </BrowseNavbar>
-                <div>
-                    <Title>Regarder South Park maintenant</Title>
-                    <SubTitle>
-                        Dans cette sitcom satirique, quatre gamins insolents tournent joyeusement en ridicule célébrités et autres personnalités politiques.
-                    </SubTitle>
-                    <PlayButton onClick={() => true}>Play</PlayButton>
-                </div>
-            </BrowserHeader>
+  const [movie, setMovie]: any = useState([]);
 
-            <RowShow title="Trending Now" fetchUrl={Requests.trending} />
+  useEffect(() => {
+
+    async function fetchData() {
+      const request = await axios.get(Requests.netflixOriginals);
 
 
-            <FooterComponent />
-        </>
-    )
-}
+      setMovie(request.data.results[
+        Math.floor(Math.random() * request.data.results.length)
+      ]);
  
+
+      return request;
+    }
+
+    fetchData();
+
+  }, []);
+
+
+
+  
+
+
+//${movie.backdrop_path? url(https://image.tmdb.org/t/p/original${movie.backdrop_path})}`,
+  return (
+    <>
+      <BrowserHeader style={{
+        backgroundImage: `linear-gradient(to top,rgba(0,0,0,.8) 0,rgba(0,0,0,0) 80% ,rgba(0,0,0,.8) 100%), url(https://image.tmdb.org/t/p/original${movie.backdrop_path})}`,
+      }}>
+        <BrowseNavbar>
+          <Logo />
+          <HeaderLink>Films</HeaderLink>
+          <HeaderLink>Series</HeaderLink>
+        </BrowseNavbar>
+        <div>
+          <Title>Regarder {movie?.title || movie?.original_title || movie?.name || movie?.original_name} maintenant</Title>
+          <SubTitle>
+            {movie?.overview}</SubTitle>
+          <PlayButton onClick={() => true}>Play</PlayButton>
+        </div>
+      </BrowserHeader>
+
+      <RowShow title="Trending Now" fetchUrl={Requests.trending} />
+
+
+      <FooterComponent />
+    </>
+  )
+}
+
 export default BrowsePage
 
 
@@ -98,8 +126,7 @@ export const BrowseNavbar = styled.nav`
 `
 
 
-export const BrowserHeader = styled.div`
-  background: linear-gradient(to top,rgba(0,0,0,.8) 0,rgba(0,0,0,0) 80% ,rgba(0,0,0,.8) 100%) , url('/img/sp.webp');
+export const BrowserHeader = styled.div` 
   background-position: center top;
   background-size: cover;
   background-repeat: no-repeat;

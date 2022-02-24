@@ -1,5 +1,5 @@
 const API_KEY = process.env.REACT_APP_API_KEY;
-const language = "en-US";
+const language = "fr-FR";
 
 const Requests = {
     trending: `/trending/all/week?api_key=${API_KEY}&language=${language}&page=1`,
