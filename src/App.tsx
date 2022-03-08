@@ -18,16 +18,19 @@ import BrowsePage from './pages/BrowsePage';
 import Profiles from './pages/Profiles';
 
 export default () => {
+
+    /*
     const { value, test } = useAppSelector((state) => state.counter)
-    const dispatch = useAppDispatch()
+    const dispatch = useAppDispatch() */
 
     return (
         <Router>
             <div>
+                {/*
                 <ul>
                     <Link to="/">{value}{test}</Link>
                     <Button onClick={() => dispatch(increment())}>TEST</Button>
-                </ul>
+                </ul> */ }
                 <Routes >
                     <Route path='/' element={<HomePage />} />
                     <Route path='/login' element={<Login />} />
