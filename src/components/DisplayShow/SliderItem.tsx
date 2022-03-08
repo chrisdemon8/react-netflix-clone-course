@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react"; 
+import React, { useCallback, useEffect, useState } from "react";
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -6,8 +6,10 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import styled from "styled-components";
 import axios from "../Requests/Axios";
+
+import { makeStyles } from '@mui/styles';
 import { useDispatch } from "react-redux";
-import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 
 interface Movierops {
     id: string;
@@ -15,39 +17,6 @@ interface Movierops {
     src: string;
     title: any;
 }
-
-
-
-const Theme = {
-    palette: {
-        primary: {
-            contrastText: "#FFFFFF",
-            dark: "#FFFFFF",
-            main: "#FFFFFF",
-            light: "#FFFFFF"
-        }
-    },
-    overrides: {
-        MuiOutlinedInput: {
-            root: {
-                position: "relative",
-                "& $notchedOutline": {
-                    borderColor: "#FFFFFF"
-                },
-                "&:hover:not($disabled):not($focused):not($error) $notchedOutline": {
-                    borderColor: "#FFFFFF",
-                    "@media (hover: none)": {
-                        borderColor: "#FFFFFF"
-                    }
-                },
-                "&$focused $notchedOutline": {
-                    borderColor: "#FFFFFF",
-                    borderWidth: 1
-                }
-            }
-        }
-    }
-};
 
 
 const style = {
@@ -66,10 +35,43 @@ const style = {
     boxShadow: 24,
 };
 
+
+const useStyles = makeStyles({
+    input: {
+        color: "white",
+        borderColor: 'white !important'
+    },
+    notchedOutline: {
+        borderWidth: '1px',
+        borderColor: 'white !important'
+    },
+
+    cssLabel: {
+        color: 'white'
+    },
+
+    cssOutlinedInput: {
+        '&$cssFocused $notchedOutline': {
+            borderColor: `white !important`,
+        }
+    },
+
+    cssFocused: {},
+});
+
+
+
+
+
 function SliderItem({ id, mediaType, src, title }: Movierops) {
+
+
+    const classes = useStyles();
+
 
     const API_KEY = process.env.REACT_APP_API_KEY;
     const language = "fr-FR";
+
 
 
 
@@ -122,12 +124,13 @@ function SliderItem({ id, mediaType, src, title }: Movierops) {
     }, [])
 
 
-    const handleChange = (event: SelectChangeEvent) => {
+    const handleChange = (event: any) => {
         loadSeason(event.target.value);
     };
 
 
     return (
+
         <div>
             <Item onClick={() => { handleOpen(); loadData() }}>
                 <Image
@@ -186,6 +189,20 @@ function SliderItem({ id, mediaType, src, title }: Movierops) {
                                 <FormControl fullWidth>
                                     <InputLabel id="demo-simple-select-label">Saison</InputLabel>
                                     <Select
+                                        inputProps={{
+                                            classes: {
+                                                root: classes.cssOutlinedInput,
+                                                input: classes.input,
+                                                focused: classes.cssFocused,
+                                                notchedOutline: classes.notchedOutline,
+                                            },
+                                        }}
+
+                                        className={
+                                            classes.input
+                                        }
+
+
                                         labelId="demo-simple-select-label"
                                         label="season"
                                         onChange={handleChange}
@@ -269,6 +286,8 @@ function SliderItem({ id, mediaType, src, title }: Movierops) {
         </div>
     );
 }
+
+
 
 export const Image = styled.img`
 max-height: 250px;

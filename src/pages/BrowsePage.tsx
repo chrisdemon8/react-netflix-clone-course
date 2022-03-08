@@ -19,7 +19,7 @@ const BrowsePage = () => {
       setMovie(request.data.results[
         Math.floor(Math.random() * request.data.results.length)
       ]);
- 
+
 
       return request;
     }
@@ -30,10 +30,10 @@ const BrowsePage = () => {
 
 
 
-  
 
 
-//${movie.backdrop_path? url(https://image.tmdb.org/t/p/original${movie.backdrop_path})}`,
+
+  //${movie.backdrop_path? url(https://image.tmdb.org/t/p/original${movie.backdrop_path})}`,
   return (
     <>
       <BrowserHeader style={{
@@ -43,6 +43,16 @@ const BrowsePage = () => {
           <Logo />
           <HeaderLink>Films</HeaderLink>
           <HeaderLink>Series</HeaderLink>
+          <HeaderLink>Ma liste</HeaderLink>
+          <HeaderLink>
+            <div>
+            <a href="/profiles" role="button"    >
+              <span >
+                <img src="https://occ-0-5351-768.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABZfW1RUr22fiBWaYExj7CxON4XhbCzdXecA3cogZ0L2umPLeF1G2CRjQOqJ4DsYba55_ydC_mMzPhNI-1lGWzjg.png?r=9fe" alt=""/>
+              </span>
+            </a> 
+          </div>
+          </HeaderLink>
         </BrowseNavbar>
         <div>
           <Title>Regarder {movie?.title || movie?.original_title || movie?.name || movie?.original_name} maintenant</Title>
