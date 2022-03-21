@@ -7,7 +7,7 @@ import Requests from '../components/Requests/Requests';
 import RowShow from '../components/DisplayShow/RowShow';
 import { useNavigate } from 'react-router-dom';
 
-const BrowsePage = () => {
+const MoviesPage = () => {
   const navigate = useNavigate();
 
   const [movie, setMovie]: any = useState([]);
@@ -29,8 +29,7 @@ const BrowsePage = () => {
     fetchData();
 
   }, []);
-
-  //${movie.backdrop_path? url(https://image.tmdb.org/t/p/original${movie.backdrop_path})}`,
+ 
   return (
     <>
       <header
@@ -62,10 +61,7 @@ const BrowsePage = () => {
             {movie?.overview}</SubTitle>
           <PlayButton onClick={() => true}>Play</PlayButton>
         </div>
-      </header>
-      <RowShow title="Trending Now" fetchUrl={Requests.trending} />
-      <RowShow title="Netflix Originals" fetchUrl={Requests.netflixOriginals} />
-      <RowShow title="Top Rated" fetchUrl={Requests.topRated} />
+      </header> 
       <RowShow title="Horror Movies" fetchUrl={Requests.horrorMovies} />
       <RowShow title="Action Movies" fetchUrl={Requests.actionMovies} />
       <FooterComponent />
@@ -73,7 +69,7 @@ const BrowsePage = () => {
   )
 }
 
-export default BrowsePage
+export default MoviesPage
 
 
 export const PlayButton = styled.button`

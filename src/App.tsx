@@ -16,6 +16,9 @@ import HomePage from './pages/HomePage';
 import Register from './pages/Register';
 import BrowsePage from './pages/BrowsePage';
 import Profiles from './pages/Profiles';
+import MoviesPage from './pages/MoviesPage';
+import SeriesPage from './pages/SeriesPage';
+import MyListPage from './pages/MyListPage';
 
 export default () => {
 
@@ -35,6 +38,9 @@ export default () => {
                     <Route path='/' element={<HomePage />} />
                     <Route path='/login' element={<Login />} />
                     <Route path='/browse' element={<BrowsePage />} />
+                    <Route path='/movies' element={<MoviesPage />} />
+                    <Route path='/series' element={<SeriesPage />} />
+                    <Route path='/mylist' element={<MyListPage />} /> 
                     <Route path='/register' element={<Register />} />
                     <Route path='/profiles' element={<Profiles />} />
                     <Route path='*' element={<NotFoundPage />} />
