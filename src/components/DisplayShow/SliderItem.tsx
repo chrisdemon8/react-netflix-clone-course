@@ -22,7 +22,7 @@ interface Movierops {
 const style = {
     position: 'absolute' as 'absolute',
     top: '50%',
-    left: '50%', 
+    left: '50%',
     color: 'white',
     transform: 'translate(-50%, -50%)',
     maxWidth: "90%",
@@ -37,30 +37,55 @@ const style = {
 };
 
 
+
 const useStyles = makeStyles({
-    input: {
-        color: "white",
-        borderColor: 'white !important'
+    select: {
+        '&:before': {
+            borderColor: "white",
+        },
+        "&:after": {
+            borderBottomColor: "white",
+        },
+        "& .MuiSvgIcon-root": {
+            color: "white",
+        },
+    }, 
+    icon: {
+        fill: 'white',
     },
-    notchedOutline: {
-        borderWidth: '1px',
-        borderColor: 'white !important'
+    root: {
+        color: 'white',
+        "& .MuiOutlinedInput-input": {
+            color: "white",
+            background : "grey"
+          },
+          "& .MuiInputLabel-root": {
+            color: "white"
+          },
+          "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+            borderColor: "white"
+          },
+          "&:hover .MuiOutlinedInput-input": {
+            color: "white", 
+            background : "grey"
+          },
+          "&:hover .MuiInputLabel-root": {
+            color: "white"
+          },
+          "&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+            borderColor: "white"
+          },
+          "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-input": {
+            color: "white"
+          },
+          "& .MuiInputLabel-root.Mui-focused": {
+            color: "white"
+          },
+          "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
+            borderColor: "white"
+          }
     },
-
-    cssLabel: {
-        color: 'white'
-    },
-
-    cssOutlinedInput: {
-        '&$cssFocused $notchedOutline': {
-            borderColor: `white !important`,
-        }
-    },
-
-    cssFocused: {},
 });
-
-
 
 
 
@@ -72,6 +97,7 @@ function SliderItem({ id, mediaType, src, title }: Movierops) {
 
     const API_KEY = process.env.REACT_APP_API_KEY;
     const language = "fr-FR";
+
 
 
 
@@ -146,7 +172,7 @@ function SliderItem({ id, mediaType, src, title }: Movierops) {
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description" 
+                aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
 
@@ -155,7 +181,7 @@ function SliderItem({ id, mediaType, src, title }: Movierops) {
                             backgroundSize: "cover",
                             backgroundImage: movieModal.backdrop_path ? `linear-gradient(to top,rgba(0,0,0,.8) 0,rgba(0,0,0,0) 80% ,rgba(0,0,0,.8) 100%), url(https://image.tmdb.org/t/p/original${movieModal.backdrop_path})` : "",
                             backgroundPosition: "center top",
-                            height :'20%',
+                            height: '20%',
                             padding: "30px 50px",
                         }}
                     >
@@ -198,23 +224,15 @@ function SliderItem({ id, mediaType, src, title }: Movierops) {
                                 <FormControl fullWidth>
                                     <InputLabel id="demo-simple-select-label">Saison</InputLabel>
                                     <Select
+                                        onChange={handleChange}
+                                        color="primary"
+                                        className={classes.root}
                                         inputProps={{
                                             classes: {
-                                                root: classes.cssOutlinedInput,
-                                                input: classes.input,
-                                                focused: classes.cssFocused,
-                                                notchedOutline: classes.notchedOutline,
+                                                icon: classes.icon,
+                                                root: classes.root,
                                             },
                                         }}
-
-                                        className={
-                                            classes.input
-                                        }
-
-
-                                        labelId="demo-simple-select-label"
-                                        label="season"
-                                        onChange={handleChange}
                                     >
                                         {
                                             movieModal?.seasons?.map((season: any) =>
@@ -233,7 +251,7 @@ function SliderItem({ id, mediaType, src, title }: Movierops) {
                             mediaType !== 'movie' ?
                                 season?.episodes?.map((episode: any) =>
                                     <div key={episode.name}>
-                                        <a href="#"> {episode.name} </a>
+                                        <h3> {episode.name} </h3>
                                         <p>{episode.overview}</p>
                                     </div>
                                 )
@@ -258,7 +276,7 @@ function SliderItem({ id, mediaType, src, title }: Movierops) {
                                     {
                                         movieModal?.production_companies?.map((companie: any) =>
                                             <Typography key={companie.name} component={'span'} variant={'body2'}>
-                                                <a href="#"> {companie.name} </a>
+                                                <h4> {companie.name} </h4>
                                             </Typography>
                                         )
                                     }
@@ -270,7 +288,7 @@ function SliderItem({ id, mediaType, src, title }: Movierops) {
                                     {
                                         movieModal?.genres?.map((genre: any) =>
                                             <Typography key={genre.name} component={'span'} variant={'body2'}>
-                                                <a href="#"> {genre.name} </a>
+                                                <h4> {genre.name} </h4>
                                             </Typography>
                                         )
                                     }
@@ -278,13 +296,13 @@ function SliderItem({ id, mediaType, src, title }: Movierops) {
                                 <div ><Typography component={'span'} variant={'body2'}>Catégorie d'âge&nbsp;:</Typography>
 
                                     <Typography component={'span'} variant={'body2'}>
-                                        <a href="#" >
+                                        <h4>
                                             {
                                                 movieModal.adult === true ?
                                                     'Attention pour adulte'
                                                     : 'Tout public'
                                             }
-                                        </a>
+                                        </h4>
                                     </Typography>
                                 </div>
                             </div>
