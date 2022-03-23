@@ -1,4 +1,27 @@
 # react-netflix-clone-course
+ 
+## Features qui marche le 23/03/2022
+
+-   Login
+-   Who's watching 
+    -   Edit profile 
+-   Home page
+    -   Section by type
+    -   Top shows 
+-   Display details of a show
+    -   Movie: description, actors, cover, etc
+    -   Series: list of episodes, description, actors, cover,
+  
+
+## Features à faire
+-   Who's watching
+    -   Create new profile 
+    -   Delete profile
+-   My List (care, this is scoped to a profile)
+    -   Add to my List
+    -   Remove from my List
+-   Search
+
 
 ## Features
 

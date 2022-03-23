@@ -9,17 +9,19 @@ import { v4 as uuidv4 } from 'uuid';
 interface RowProps {
     title: string;
     fetchUrl: string;
+    mediaTypeForce ?: string ; 
 }
 
 
-function RowShow({ title, fetchUrl }: RowProps) {
+function RowShow({ title, fetchUrl, mediaTypeForce}: RowProps) {
     const [movies, setMovies] = useState([]);
-
+ 
     useEffect(() => {
 
         async function fetchData() {
             const request = await axios.get(fetchUrl);
             setMovies(request.data.results); 
+            console.log(request.data.results); 
             return request;
         }
 
@@ -35,7 +37,7 @@ function RowShow({ title, fetchUrl }: RowProps) {
 
             <Slider>
                 {movies.map((movie: any) => (
-                    <SliderItem key={uuidv4()} id={movie.id} mediaType={movie.media_type} src={movie.poster_path} title={movie?.title || movie?.original_title || movie?.name || movie?.original_name || ""}/>
+                    <SliderItem key={uuidv4()} id={movie.id} mediaType={mediaTypeForce || movie.media_type } src={movie.poster_path} title={movie?.title || movie?.original_title || movie?.name || movie?.original_name || ""}/>
                          
                 ))}
             </Slider>

@@ -49,7 +49,7 @@ const useStyles = makeStyles({
         "& .MuiSvgIcon-root": {
             color: "white",
         },
-    }, 
+    },
     icon: {
         fill: 'white',
     },
@@ -57,33 +57,33 @@ const useStyles = makeStyles({
         color: 'white',
         "& .MuiOutlinedInput-input": {
             color: "white",
-            background : "grey"
-          },
-          "& .MuiInputLabel-root": {
+            background: "grey"
+        },
+        "& .MuiInputLabel-root": {
             color: "white"
-          },
-          "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+        },
+        "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
             borderColor: "white"
-          },
-          "&:hover .MuiOutlinedInput-input": {
-            color: "white", 
-            background : "grey"
-          },
-          "&:hover .MuiInputLabel-root": {
+        },
+        "&:hover .MuiOutlinedInput-input": {
+            color: "white",
+            background: "grey"
+        },
+        "&:hover .MuiInputLabel-root": {
             color: "white"
-          },
-          "&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+        },
+        "&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
             borderColor: "white"
-          },
-          "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-input": {
+        },
+        "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-input": {
             color: "white"
-          },
-          "& .MuiInputLabel-root.Mui-focused": {
+        },
+        "& .MuiInputLabel-root.Mui-focused": {
             color: "white"
-          },
-          "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
+        },
+        "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
             borderColor: "white"
-          }
+        }
     },
 });
 
@@ -117,19 +117,17 @@ function SliderItem({ id, mediaType, src, title }: Movierops) {
 
         let requestTv: any;
 
-        console.log(id);
+        console.log(id, mediaType);
         if (mediaType === "movie")
             request = await axios.get(`/movie/${id}?api_key=${API_KEY}&language=${language}`,);
         else {
-
             request = await axios.get(`/tv/${id}?api_key=${API_KEY}&language=${language}`,);
 
             requestTv = await axios.get(`/tv/${id}/season/1?api_key=${API_KEY}&language=${language}`,);
 
             setSeason(requestTv.data);
+ 
         }
-
-        console.log(request.data)
 
         setMovieModal(request.data);
 
@@ -146,16 +144,16 @@ function SliderItem({ id, mediaType, src, title }: Movierops) {
         requestTv = await axios.get(`/tv/${id}/season/${seasonNumber}?api_key=${API_KEY}&language=${language}`,);
         setSeason(requestTv.data);
 
+        
+        
         return requestTv;
 
     }, [])
-
-
+ 
     const handleChange = (event: any) => {
         loadSeason(event.target.value);
     };
-
-
+ 
     return (
 
         <div key={id}>
@@ -225,8 +223,8 @@ function SliderItem({ id, mediaType, src, title }: Movierops) {
                                     <InputLabel id="demo-simple-select-label">Saison</InputLabel>
                                     <Select
                                         onChange={handleChange}
-                                        color="primary"
-                                        className={classes.root}
+                                        className={classes.root} 
+                                        value={season?.season_number ?? 0}
                                         inputProps={{
                                             classes: {
                                                 icon: classes.icon,
@@ -238,6 +236,7 @@ function SliderItem({ id, mediaType, src, title }: Movierops) {
                                             movieModal?.seasons?.map((season: any) =>
                                                 <MenuItem key={season.season_number} value={season.season_number}>{season.season_number}</MenuItem>
                                             )
+
                                         }
 
                                     </Select>

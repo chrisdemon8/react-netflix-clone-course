@@ -66,9 +66,9 @@ const BrowsePage = () => {
       </header>
       <RowShow title="Trending Now" fetchUrl={Requests.trending} />
       <RowShow title="Netflix Originals" fetchUrl={Requests.netflixOriginals} />
-      <RowShow title="Top Rated" fetchUrl={Requests.topRated} />
-      <RowShow title="Horror Movies" fetchUrl={Requests.horrorMovies} />
-      <RowShow title="Action Movies" fetchUrl={Requests.actionMovies} />
+      <RowShow title="Top Rated" fetchUrl={Requests.topRated} mediaTypeForce="movie"/>
+      <RowShow title="Horror Movies" fetchUrl={Requests.horrorMovies} mediaTypeForce="movie"/>
+      <RowShow title="Action Movies" fetchUrl={Requests.actionMovies} mediaTypeForce="movie"/>
       <FooterComponent />
     </>
   )

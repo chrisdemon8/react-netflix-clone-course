@@ -62,8 +62,8 @@ const MoviesPage = () => {
           <PlayButton onClick={() => true}>Play</PlayButton>
         </div>
       </header> 
-      <RowShow title="Horror Movies" fetchUrl={Requests.horrorMovies} />
-      <RowShow title="Action Movies" fetchUrl={Requests.actionMovies} />
+      <RowShow title="Horror Movies" fetchUrl={Requests.horrorMovies} mediaTypeForce="movie"/>
+      <RowShow title="Action Movies" fetchUrl={Requests.actionMovies} mediaTypeForce="movie"/>
       <FooterComponent />
     </>
   )
