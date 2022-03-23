@@ -22,10 +22,11 @@ interface Movierops {
 const style = {
     position: 'absolute' as 'absolute',
     top: '50%',
-    left: '50%',
+    left: '50%', 
     color: 'white',
     transform: 'translate(-50%, -50%)',
-    maxWidth: 850,
+    maxWidth: "90%",
+    minWidth: "70%",
     width: 'max-content',
     height: "80%",
     overflow: 'auto',
@@ -131,7 +132,7 @@ function SliderItem({ id, mediaType, src, title }: Movierops) {
 
     return (
 
-        <div>
+        <div key={id}>
             <Item onClick={() => { handleOpen(); loadData() }}>
                 <Image
 
@@ -145,12 +146,19 @@ function SliderItem({ id, mediaType, src, title }: Movierops) {
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
+                aria-describedby="modal-modal-description" 
             >
                 <Box sx={style}>
-                    <BrowserHeader style={{
-                        backgroundImage: movieModal.backdrop_path ? `linear-gradient(to top,rgba(0,0,0,.8) 0,rgba(0,0,0,0) 80% ,rgba(0,0,0,.8) 100%), url(https://image.tmdb.org/t/p/original${movieModal.backdrop_path})}` : '',
-                    }}>
+
+                    <header
+                        style={{
+                            backgroundSize: "cover",
+                            backgroundImage: movieModal.backdrop_path ? `linear-gradient(to top,rgba(0,0,0,.8) 0,rgba(0,0,0,0) 80% ,rgba(0,0,0,.8) 100%), url(https://image.tmdb.org/t/p/original${movieModal.backdrop_path})` : "",
+                            backgroundPosition: "center top",
+                            height :'20%',
+                            padding: "30px 50px",
+                        }}
+                    >
 
                         <div>
                             <PlayButton onClick={() => true}>Play</PlayButton>
@@ -174,7 +182,8 @@ function SliderItem({ id, mediaType, src, title }: Movierops) {
                                 </svg>
                             </ActionButton>
                         </div>
-                    </BrowserHeader>
+
+                    </header>
                     <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                         Regarder {movieModal?.title || movieModal?.original_title || movieModal?.name || movieModal?.original_name} maintenant
                     </Typography>
@@ -209,7 +218,7 @@ function SliderItem({ id, mediaType, src, title }: Movierops) {
                                     >
                                         {
                                             movieModal?.seasons?.map((season: any) =>
-                                                <MenuItem value={season.season_number}>{season.season_number}</MenuItem>
+                                                <MenuItem key={season.season_number} value={season.season_number}>{season.season_number}</MenuItem>
                                             )
                                         }
 
@@ -223,7 +232,7 @@ function SliderItem({ id, mediaType, src, title }: Movierops) {
                         {
                             mediaType !== 'movie' ?
                                 season?.episodes?.map((episode: any) =>
-                                    <div>
+                                    <div key={episode.name}>
                                         <a href="#"> {episode.name} </a>
                                         <p>{episode.overview}</p>
                                     </div>
@@ -248,7 +257,7 @@ function SliderItem({ id, mediaType, src, title }: Movierops) {
 
                                     {
                                         movieModal?.production_companies?.map((companie: any) =>
-                                            <Typography component={'span'} variant={'body2'}>
+                                            <Typography key={companie.name} component={'span'} variant={'body2'}>
                                                 <a href="#"> {companie.name} </a>
                                             </Typography>
                                         )
@@ -260,7 +269,7 @@ function SliderItem({ id, mediaType, src, title }: Movierops) {
                                     <Typography component={'span'} variant={'body2'}>Genres&nbsp;:</Typography>
                                     {
                                         movieModal?.genres?.map((genre: any) =>
-                                            <Typography component={'span'} variant={'body2'}>
+                                            <Typography key={genre.name} component={'span'} variant={'body2'}>
                                                 <a href="#"> {genre.name} </a>
                                             </Typography>
                                         )
