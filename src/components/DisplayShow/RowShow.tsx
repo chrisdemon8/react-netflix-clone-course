@@ -20,8 +20,7 @@ function RowShow({ title, fetchUrl, mediaTypeForce}: RowProps) {
 
         async function fetchData() {
             const request = await axios.get(fetchUrl);
-            setMovies(request.data.results); 
-            console.log(request.data.results); 
+            setMovies(request.data.results);  
             return request;
         }
 

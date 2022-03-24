@@ -3,9 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import HeaderComponent from '../components/Header/HeaderComponent';
 import styled from 'styled-components';
 import Logo from '../components/Header/Logo';
-
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
 import { v4 as uuidv4 } from 'uuid';
+import { Button } from '@mui/material';
 
 
 
@@ -37,24 +38,52 @@ export const useLocalStorage = (key: string, defaultValue: string) => {
 
 
 export default function Profiles() {
- 
+
   const [edit, setEdit] = useState(false);
-   
+
+
+
+  if (localStorage.getItem("profilesReactNetflixClone") === null) {
+    localStorage.setItem('profilesReactNetflixClone', JSON.stringify({
+      "user1": { "name": "chris", "image": "https://occ-0-5351-768.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABbU9eqkBgvU1DIIchQhvQn9qyCbirDHVaDIdYNRKmqlLfqAkOLSvufpEGOAYDKtlG0ie0L0oP-pd-UFx4MiOB2I9rWX_.png?r=9fe", "list": ["1", "2"] },
+      "user2": { "name": "kmi", "image": "https://occ-0-5351-768.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABedRSQ_RQb8layV_wFNLCULps33qI0-D_EXTuaVk2IxuLvWZQ8nUHeGyVrP7PS86WpWLUn0r840dIRMAFD47K6XzHaNH.png?r=d7c", "list": ["15", "46"] },
+      "user3": { "name": "Benoît", "image": "https://occ-0-5351-768.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABSMMlTr6UzP0M0lPzHSW7YSSGJcUdgTZuD1n9sPTa1pwH-B3k-0W2Afcx8zFCjUHpSuqlcQhrSmdIFfz0p4kr5GI6L2T.png?r=e1f", "list": ["15", "46"] },
+      "user4": { "name": "Val&Dav", "image": "https://occ-0-5351-768.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABeUqbfriC_pGWtwTa1KOx-ZSiQYa7ltLkOuduGxY_GRRc41ugYJNGYHe4LNcmshST4qkRSENvcs2xFomPc0rtX8wq2NG.png?r=b97", "list": ["15", "46"] }
+    }));
+  } 
+  
+  // @ts-ignore 
+  var profilesObject: Iprofiles = localStorage.getItem('profilesReactNetflixClone');
+
+
+  console.log("profilesObject", profilesObject)
+
   const [profiles, setProfiles] = useState<Iprofiles>({
     "user1": { "name": "chris", "image": "https://occ-0-5351-768.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABbU9eqkBgvU1DIIchQhvQn9qyCbirDHVaDIdYNRKmqlLfqAkOLSvufpEGOAYDKtlG0ie0L0oP-pd-UFx4MiOB2I9rWX_.png?r=9fe", "list": ["1", "2"] },
     "user2": { "name": "kmi", "image": "https://occ-0-5351-768.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABedRSQ_RQb8layV_wFNLCULps33qI0-D_EXTuaVk2IxuLvWZQ8nUHeGyVrP7PS86WpWLUn0r840dIRMAFD47K6XzHaNH.png?r=d7c", "list": ["15", "46"] },
     "user3": { "name": "Benoît", "image": "https://occ-0-5351-768.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABSMMlTr6UzP0M0lPzHSW7YSSGJcUdgTZuD1n9sPTa1pwH-B3k-0W2Afcx8zFCjUHpSuqlcQhrSmdIFfz0p4kr5GI6L2T.png?r=e1f", "list": ["15", "46"] },
     "user4": { "name": "Val&Dav", "image": "https://occ-0-5351-768.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABeUqbfriC_pGWtwTa1KOx-ZSiQYa7ltLkOuduGxY_GRRc41ugYJNGYHe4LNcmshST4qkRSENvcs2xFomPc0rtX8wq2NG.png?r=b97", "list": ["15", "46"] }
   });
-  
+
+  console.log("profilesObject", profilesObject)
+
   const handleOnChange = (event: { target: { name: string; value: string; }; }) => {
-    const { name, value } = event.target;  
+    const { name, value } = event.target;
     setProfiles({ ...profiles, [name]: { ...profiles[name], "name": value } });
   };
 
 
+  const handleRemoveItem = (e: any) => {
+
+    const name = e.target.getAttribute("name")
+    setProfiles({ ...profiles, [name]: { ...profiles[name], "name": 'Créer le profil', "list": [] } });
+  };
+
+
+
+
   console.log(profiles)
-  
+
 
   return (
     <div>
@@ -81,6 +110,9 @@ export default function Profiles() {
                               </ProfileIcon>
 
                               <InputName name={key} value={profile.name} onChange={handleOnChange}></InputName>
+                              <Button name={key} onClick={handleRemoveItem} startIcon={<DeleteOutlineIcon />}>
+                                Supprimer
+                              </Button>
                             </div>
                             :
                             <ProfileLink href="#">
@@ -89,7 +121,7 @@ export default function Profiles() {
 
                               <ProfileName >{profile.name}</ProfileName>
                             </ProfileLink>
-                        } 
+                        }
                       </AvatarWrapper>
                       <div>
                       </div>

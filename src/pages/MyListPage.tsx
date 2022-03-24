@@ -8,32 +8,40 @@ import RowShow from '../components/DisplayShow/RowShow';
 import { useNavigate } from 'react-router-dom';
 
 const MyListPage = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const [movie, setMovie]: any = useState([]);
- 
+  const [movie, setMovie]: any = useState([]);
 
-    return (
-        <>
-            <BrowseNavbar>
-                <Logo />
-                <HeaderLink onClick={() => navigate('/browse')}>Home</HeaderLink>
-                <HeaderLink onClick={() => navigate('/movies')}>Films</HeaderLink>
-                <HeaderLink onClick={() => navigate('/series')}>Series</HeaderLink>
-                <HeaderLink onClick={() => navigate('/mylist')}>Ma liste</HeaderLink>
-                <HeaderLink>
-                    <div>
-                        <a href="/profiles" role="button"    >
-                            <span >
-                                <img src="https://occ-0-5351-768.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABZfW1RUr22fiBWaYExj7CxON4XhbCzdXecA3cogZ0L2umPLeF1G2CRjQOqJ4DsYba55_ydC_mMzPhNI-1lGWzjg.png?r=9fe" alt="" />
-                            </span>
-                        </a>
-                    </div>
-                </HeaderLink>
-            </BrowseNavbar>
-            <FooterComponent />
-        </>
-    )
+
+  return (
+    <>
+      <header
+        style={{
+          backgroundSize: "cover", 
+          backgroundPosition: "center top",
+          padding: "30px 50px",
+        }}
+      >
+        <BrowseNavbar>
+          <Logo />
+          <HeaderLink onClick={() => navigate('/browse')}>Home</HeaderLink>
+          <HeaderLink onClick={() => navigate('/movies')}>Films</HeaderLink>
+          <HeaderLink onClick={() => navigate('/series')}>Series</HeaderLink>
+          <HeaderLink onClick={() => navigate('/mylist')}>Ma liste</HeaderLink>
+          <HeaderLink>
+            <div>
+              <a href="/profiles" role="button"    >
+                <span >
+                  <img src="https://occ-0-5351-768.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABZfW1RUr22fiBWaYExj7CxON4XhbCzdXecA3cogZ0L2umPLeF1G2CRjQOqJ4DsYba55_ydC_mMzPhNI-1lGWzjg.png?r=9fe" alt="" />
+                </span>
+              </a>
+            </div>
+          </HeaderLink>
+        </BrowseNavbar>
+      </header>
+      <FooterComponent />
+    </>
+  )
 }
 
 export default MyListPage

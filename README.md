@@ -3,8 +3,10 @@
 ## Features qui marche le 23/03/2022
 
 -   Login
--   Who's watching 
+-   Who's watching
+    -   Create new profile  
     -   Edit profile 
+    -   Delete profile 
 -   Home page
     -   Section by type
     -   Top shows 
@@ -13,10 +15,7 @@
     -   Series: list of episodes, description, actors, cover,
   
 
-## Features à faire
--   Who's watching
-    -   Create new profile 
-    -   Delete profile
+## Features à faire 
 -   My List (care, this is scoped to a profile)
     -   Add to my List
     -   Remove from my List

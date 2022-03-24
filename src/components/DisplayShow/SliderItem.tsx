@@ -116,8 +116,7 @@ function SliderItem({ id, mediaType, src, title }: Movierops) {
         let request: any;
 
         let requestTv: any;
-
-        console.log(id, mediaType);
+ 
         if (mediaType === "movie")
             request = await axios.get(`/movie/${id}?api_key=${API_KEY}&language=${language}`,);
         else {

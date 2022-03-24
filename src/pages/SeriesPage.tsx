@@ -11,15 +11,32 @@ const SeriesPage = () => {
   const navigate = useNavigate();
 
   const [movie, setMovie]: any = useState([]);
- 
- 
+
+  useEffect(() => {
+
+    async function fetchData() {
+      const request = await axios.get(Requests.netflixOriginals);
+
+
+      setMovie(request.data.results[
+        Math.floor(Math.random() * request.data.results.length)
+      ]);
+
+
+      return request;
+    }
+
+    fetchData();
+
+  }, []);
   return (
     <>
-      <header
+ <header
         style={{
           backgroundSize: "cover",
           backgroundImage: movie.backdrop_path ? `url(https://image.tmdb.org/t/p/original${movie.backdrop_path})` : "",
-          backgroundPosition: "center top"
+          backgroundPosition: "center top",
+          padding: "30px 50px",
         }}
       >
         <BrowseNavbar>
@@ -38,7 +55,14 @@ const SeriesPage = () => {
             </div>
           </HeaderLink>
         </BrowseNavbar> 
+        <div>
+          <Title>Regarder {movie?.title || movie?.original_title || movie?.name || movie?.original_name} maintenant</Title>
+          <SubTitle>
+            {movie?.overview}</SubTitle>
+          <PlayButton onClick={() => true}>Play</PlayButton>
+        </div>
       </header>  
+      <RowShow title="Netflix Originals" fetchUrl={Requests.netflixOriginals} />
       <FooterComponent />
     </>
   )

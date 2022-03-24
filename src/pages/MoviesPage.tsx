@@ -36,7 +36,8 @@ const MoviesPage = () => {
         style={{
           backgroundSize: "cover",
           backgroundImage: movie.backdrop_path ? `url(https://image.tmdb.org/t/p/original${movie.backdrop_path})` : "",
-          backgroundPosition: "center top"
+          backgroundPosition: "center top",
+          padding: "30px 50px",
         }}
       >
         <BrowseNavbar>
